@@ -18,47 +18,47 @@
             <VBox>
                 <TableView fx:id="expenseTable">
                     <columns>
-                        <TableColumn fx:id="date" editable="false" text="Période">
+                        <TableColumn editable="false" text="Période">
                             <cellValueFactory>
                                 <PropertyValueFactory property="date"/>
                             </cellValueFactory>
                         </TableColumn>
-                        <TableColumn fx:id="total" editable="false" text="Total">
+                        <TableColumn editable="false" text="Total">
                             <cellValueFactory>
                                 <PropertyValueFactory property="total"/>
                             </cellValueFactory>
                         </TableColumn>
-                        <TableColumn fx:id="housing" editable="false" text="Logement">
+                        <TableColumn editable="false" text="Logement">
                             <cellValueFactory>
                                 <PropertyValueFactory property="housing"/>
                             </cellValueFactory>
                         </TableColumn>
-                        <TableColumn fx:id="food" editable="false" text="Nourriture">
+                        <TableColumn editable="false" text="Nourriture">
                             <cellValueFactory>
                                 <PropertyValueFactory property="food"/>
                             </cellValueFactory>
                         </TableColumn>
-                        <TableColumn fx:id="goingOut" editable="false" text="Sorties">
+                        <TableColumn editable="false" text="Sorties">
                             <cellValueFactory>
                                 <PropertyValueFactory property="goingOut"/>
                             </cellValueFactory>
                         </TableColumn>
-                        <TableColumn fx:id="transportation" editable="false" text="Transport">
+                        <TableColumn editable="false" text="Transport">
                             <cellValueFactory>
                                 <PropertyValueFactory property="transportation"/>
                             </cellValueFactory>
                         </TableColumn>
-                        <TableColumn fx:id="travel" editable="false" text="Voyage">
+                        <TableColumn editable="false" text="Voyage">
                             <cellValueFactory>
                                 <PropertyValueFactory property="travel"/>
                             </cellValueFactory>
                         </TableColumn>
-                        <TableColumn fx:id="tax" editable="false" text="Impôts">
+                        <TableColumn editable="false" text="Impôts">
                             <cellValueFactory>
                                 <PropertyValueFactory property="tax"/>
                             </cellValueFactory>
                         </TableColumn>
-                        <TableColumn fx:id="other" editable="false" text="Autres">
+                        <TableColumn editable="false" text="Autres">
                             <cellValueFactory>
                                 <PropertyValueFactory property="other"/>
                             </cellValueFactory>
