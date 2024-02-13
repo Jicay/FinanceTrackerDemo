@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.example.financemanager.model.Expense?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="750.0" styleClass="shadow-pane"
+            xmlns="http://javafx.com/javafx/10.0.2-internal">
+    <center>
+        <VBox>
+            <HBox alignment="CENTER">
+                <Label text="Tableau récapitulatif des dépenses"/>
+            </HBox>
+            <VBox>
+                <TableView fx:id="expenseTable">
+                    <columns>
+                        <TableColumn fx:id="date" editable="false" text="Période">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="date"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="total" editable="false" text="Total">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="total"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="housing" editable="false" text="Logement">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="housing"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="food" editable="false" text="Nourriture">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="food"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="goingOut" editable="false" text="Sorties">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="goingOut"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="transportation" editable="false" text="Voiture/Transport">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="transportation"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="travel" editable="false" text="Voyage">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="travel"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="tax" editable="false" text="Impôts">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="tax"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="other" editable="false" text="Autres">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="other"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                    </columns>
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <Expense date="2020-01" total="1000" housing="100" food="100" goingOut="100"
+                                     transportation="100" travel="100" tax="100" other="100"/>
+                            <Expense date="2020-02" total="1000" housing="100" food="100" goingOut="100"
+                                     transportation="100" travel="100" tax="100" other="100"/>
+                            <Expense date="2020-03" total="1000" housing="100" food="100" goingOut="100"
+                                     transportation="100" travel="100" tax="100" other="100"/>
+                        </FXCollections>
+                    </items>
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                    </columnResizePolicy>
+                </TableView>
+            </VBox>
+        </VBox>
+    </center>
+</BorderPane>
