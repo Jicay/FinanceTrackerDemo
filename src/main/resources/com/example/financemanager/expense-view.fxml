@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.example.financemanager.model.Expense?>
-<?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.cell.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="750.0" styleClass="shadow-pane"
-            stylesheets="@css/styles.css" xmlns="http://javafx.com/javafx/10.0.2-internal">
+            stylesheets="@css/styles.css" xmlns="http://javafx.com/javafx/10.0.2-internal"
+            fx:controller="com.example.financemanager.controller.ExpenseController">
     <center>
         <VBox spacing="10" styleClass="background-pane">
             <HBox alignment="CENTER">
@@ -64,21 +62,14 @@
                             </cellValueFactory>
                         </TableColumn>
                     </columns>
-                    <items>
-                        <FXCollections fx:factory="observableArrayList">
-                            <Expense date="2020-01" total="1000" housing="100" food="100" goingOut="100"
-                                     transportation="100" travel="100" tax="100" other="100"/>
-                            <Expense date="2020-02" total="1000" housing="100" food="100" goingOut="100"
-                                     transportation="100" travel="100" tax="100" other="100"/>
-                            <Expense date="2020-03" total="1000" housing="100" food="100" goingOut="100"
-                                     transportation="100" travel="100" tax="100" other="100"/>
-                        </FXCollections>
-                    </items>
                     <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
                     </columnResizePolicy>
                 </TableView>
             </VBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="40.0" spacing="20.0" BorderPane.alignment="CENTER">
+                <Button text="Ajouter" onAction="#addExpense"/>
+            </HBox>
         </VBox>
     </center>
 </BorderPane>

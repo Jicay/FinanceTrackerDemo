@@ -27,6 +27,7 @@
 .button {
     -fill: -primary;
     -fx-background-color: -fill;
+    -fx-text-fill: white;
 }
 
 .button:hover {

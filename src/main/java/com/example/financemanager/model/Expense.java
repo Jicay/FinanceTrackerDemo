@@ -1,23 +1,26 @@
 package com.example.financemanager.model;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Expense {
-    private String date;
-    private float total;
-    private float housing;
-    private float food;
-    private float goingOut;
-    private float transportation;
-    private float travel;
-    private float tax;
-    private float other;
+    private final LocalDate date;
+    private final float total;
+    private final float housing;
+    private final float food;
+    private final float goingOut;
+    private final float transportation;
+    private final float travel;
+    private final float tax;
+    private final float other;
 
-    public Expense() {
-        this("", 0, 0, 0, 0, 0, 0, 0, 0);
-    }
+    private final static String PRICE_FORMAT = "%.2f €";
 
-    public Expense(String date, float total, float housing, float food, float goingOut, float transportation, float travel, float tax, float other) {
+    private final static DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("MMMM yyyy");
+
+    public Expense(LocalDate date, float housing, float food, float goingOut, float transportation, float travel, float tax, float other) {
         this.date = date;
-        this.total = total;
+        this.total = housing + food + goingOut + transportation + travel + tax + other;
         this.housing = housing;
         this.food = food;
         this.goingOut = goingOut;
@@ -28,75 +31,39 @@ public class Expense {
     }
 
     public String getDate() {
-        return date;
+            return date.format(DATE_FORMAT);
     }
 
-    public float getTotal() {
-        return total;
+    public String getTotal() {
+        return String.format(PRICE_FORMAT, total);
     }
 
-    public float getHousing() {
-        return housing;
+    public String getHousing() {
+        return String.format(PRICE_FORMAT, housing);
     }
 
-    public float getFood() {
-        return food;
+    public String getFood() {
+        return String.format(PRICE_FORMAT, food);
     }
 
-    public float getGoingOut() {
-        return goingOut;
+    public String getGoingOut() {
+        return String.format(PRICE_FORMAT, goingOut);
     }
 
-    public float getTransportation() {
-        return transportation;
+    public String getTransportation() {
+        return String.format(PRICE_FORMAT, transportation);
     }
 
-    public float getTravel() {
-        return travel;
+    public String getTravel() {
+        return String.format(PRICE_FORMAT, travel);
     }
 
-    public float getTax() {
-        return tax;
+    public String getTax() {
+        return String.format(PRICE_FORMAT, tax);
     }
 
-    public float getOther() {
-        return other;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public void setTotal(float total) {
-        this.total = total;
-    }
-
-    public void setHousing(float housing) {
-        this.housing = housing;
-    }
-
-    public void setFood(float food) {
-        this.food = food;
-    }
-
-    public void setGoingOut(float goingOut) {
-        this.goingOut = goingOut;
-    }
-
-    public void setTransportation(float transportation) {
-        this.transportation = transportation;
-    }
-
-    public void setTravel(float travel) {
-        this.travel = travel;
-    }
-
-    public void setTax(float tax) {
-        this.tax = tax;
-    }
-
-    public void setOther(float other) {
-        this.other = other;
+    public String getOther() {
+        return String.format(PRICE_FORMAT, other);
     }
 
     @Override

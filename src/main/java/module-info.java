@@ -6,4 +6,6 @@ module com.example.financemanager {
     opens com.example.financemanager to javafx.fxml;
     exports com.example.financemanager;
     exports com.example.financemanager.model;
+    exports com.example.financemanager.controller;
+    opens com.example.financemanager.controller to javafx.fxml;
 }
