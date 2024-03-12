@@ -3,11 +3,13 @@ plugins {
     id 'application'
     id 'org.javamodularity.moduleplugin' version '1.8.12'
     id 'org.openjfx.javafxplugin' version '0.0.13'
-    id 'org.beryx.jlink' version '2.25.0'
+    id 'org.beryx.jlink' version '3.0.1'
 }
 
 group 'com.example'
 version '1.0.0'
+
+project.description = "Simple tool for tracking your finances"
 
 repositories {
     mavenCentral()
@@ -36,6 +38,9 @@ javafx {
 
 dependencies {
     implementation("org.xerial:sqlite-jdbc:3.44.1.0")
+    implementation("org.apache.logging.log4j:log4j-core:2.22.1")
+    implementation("org.slf4j:slf4j-log4j12:2.0.11")
+    implementation("org.slf4j:slf4j-api:2.0.11")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
@@ -49,7 +54,38 @@ jlink {
     imageZip = project.file("${buildDir}/distributions/app-${javafx.platform.classifier}.zip")
     options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
     launcher {
-        name = 'app'
+        name = 'FinanceTracker'
+    }
+    addExtraDependencies('slf4j')
+    jpackage {
+        installerOptions = [
+                '--description', project.description,
+                '--copyright', 'None'
+        ]
+        installerType = project.findProperty('installerType')
+        // we will pass this from the command line (example: -PinstallerType=msi)
+        if (org.gradle.internal.os.OperatingSystem.current().windows) {
+            imageOptions += ['--icon', 'src/main/resources/com/example/financemanager/assets/icon.ico']
+            installerOptions += [
+                    '--win-per-user-install', '--win-dir-chooser',
+                    '--win-menu', '--win-shortcut'
+            ]
+        }
+        if (org.gradle.internal.os.OperatingSystem.current().macOsX) {
+            imageOptions += ['--icon', 'src/main/resources/com/example/financemanager/assets/icon.icns']
+            installerOptions += [
+                    '--mac-package-name', 'FinanceTracker',
+                    '--mac-package-identifier', 'com.example.financemanager',
+                    '--mac-package-signing-prefix', 'com.example.financemanager'
+            ]
+        }
+        if (org.gradle.internal.os.OperatingSystem.current().linux) {
+            imageOptions += ['--icon', 'src/main/resources/com/example/financemanager/assets/icon.png']
+            installerOptions += [
+                    '--linux-menu-group', 'Office',
+                    '--linux-shortcut'
+            ]
+        }
     }
 }
 

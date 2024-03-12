@@ -3,6 +3,7 @@ module com.example.financemanager {
     requires javafx.fxml;
     requires java.sql;
     requires org.xerial.sqlitejdbc;
+    requires org.slf4j;
 
 
     opens com.example.financemanager to javafx.fxml;

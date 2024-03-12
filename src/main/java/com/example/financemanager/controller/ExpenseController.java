@@ -6,10 +6,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.TableView;
+import org.slf4j.Logger;
 
 import java.util.Optional;
 
 public class ExpenseController {
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(ExpenseController.class);
+
     @FXML
     private TableView<Expense> expenseTable;
 
@@ -22,7 +25,7 @@ public class ExpenseController {
         Optional<Expense> result = addPersonDialog.showAndWait();
         result.ifPresent(ExpenseDAO::insertExpense);
 
-        System.out.println(result);
+        log.debug(result.toString());
         event.consume();
     }
 
