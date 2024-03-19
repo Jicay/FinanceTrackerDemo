@@ -1,0 +1,35 @@
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="720.0" prefWidth="1280.0"
+            stylesheets="@css/styles.css" xmlns="http://javafx.com/javafx/10.0.2-internal"
+            fx:controller="com.example.financemanager.controller.DashboardController">
+    <top>
+        <fx:include source="header.fxml"/>
+    </top>
+    <center>
+        <VBox id="dragTarget" spacing="10" styleClass="background-pane">
+            <VBox alignment="CENTER">
+                <Label styleClass="title-text" text="Tableau de bord"/>
+                <ChoiceBox fx:id="periodChoiceBox" prefWidth="150.0" onAction="#changePeriod" />
+            </VBox>
+            <HBox alignment="CENTER">
+                <PieChart fx:id="pieChart" title="Répartition des dépenses" legendVisible="false"/>
+                <LineChart fx:id="lineChart" title="Évolution des dépenses">
+                    <xAxis>
+                        <CategoryAxis fx:id="xAxis" side="BOTTOM" label="Date"/>
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis fx:id="yAxis" side="LEFT" label="Montant"/>
+                    </yAxis>
+                </LineChart>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>

@@ -25,7 +25,7 @@ public class FinanceTrackerApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         if (Database.isOK()) {
-            FXMLLoader fxmlLoader = new FXMLLoader(FinanceTrackerApplication.class.getResource("expense-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(FinanceTrackerApplication.class.getResource("dashboard-view.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             stage.setTitle("Finance Tracker");
             stage.getIcons().add(new Image(FinanceTrackerApplication.class.getResourceAsStream("assets/icon.png")));

@@ -3,6 +3,8 @@ package com.example.financemanager.db;
 import com.example.financemanager.model.Expense;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,8 +12,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ExpenseDAO {
+
+    private static final Logger log = LoggerFactory.getLogger(ExpenseDAO.class);
 
     private static final String tableName = "expense";
     private static final String dateColumn = "date";
@@ -56,7 +62,7 @@ public class ExpenseDAO {
                         rs.getFloat(otherColumn)));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("Could not load Expenses from database", e);
             expenses.clear();
         }
     }
@@ -78,11 +84,38 @@ public class ExpenseDAO {
 
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("Could not insert Expenses in database", e);
         }
 
         //update cache
         expenses.add(expense);
     }
 
+    public static List<Expense> findLastExpensesEndingAtCurrentMonth(int numberOfLine, LocalDate currentMonth) {
+        String query = "SELECT * FROM " + tableName
+                + " WHERE " + dateColumn + " <= '" + currentMonth.format(DATE_FORMAT)
+                + "' ORDER BY " + dateColumn + " DESC LIMIT " + numberOfLine;
+
+        List<Expense> lastExpenses = new ArrayList<>();
+
+        try (Connection connection = Database.connect()) {
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                lastExpenses.add(new Expense(
+                        LocalDate.parse(rs.getString(dateColumn), DATE_FORMAT),
+                        rs.getFloat(housingColumn),
+                        rs.getFloat(foodColumn),
+                        rs.getFloat(goingOutColumn),
+                        rs.getFloat(transportationColumn),
+                        rs.getFloat(travelColumn),
+                        rs.getFloat(taxColumn),
+                        rs.getFloat(otherColumn)));
+            }
+        } catch (SQLException e) {
+            log.error("Could not load Expenses from database", e);
+        }
+        return lastExpenses;
+
+    }
 }
