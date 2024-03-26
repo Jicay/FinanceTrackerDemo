@@ -1,0 +1,11 @@
+--add-modules
+  org.testfx
+
+--add-opens
+  javafx.graphics/com.sun.javafx.application=org.testfx
+
+--add-opens
+  com.example.financemanager/com.example.financemanager=org.testfx.junit5
+
+--add-reads
+  com.example.financemanager=org.testfx,org.testfx.junit5,org.hamcrest
