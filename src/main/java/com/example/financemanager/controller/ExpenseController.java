@@ -1,5 +1,6 @@
 package com.example.financemanager.controller;
 
+import com.example.financemanager.api.CurrencyClient;
 import com.example.financemanager.db.ExpenseDAO;
 import com.example.financemanager.model.Expense;
 import javafx.event.ActionEvent;
@@ -27,6 +28,13 @@ public class ExpenseController {
 
         log.debug(result.toString());
         event.consume();
+    }
+
+    public void switchCurrency(ActionEvent actionEvent) {
+        log.debug("Switch Currency");
+        var rate = CurrencyClient.getDollarRate();
+        expenseTable.getItems().forEach(expense -> expense.switchCurrency(rate));
+        expenseTable.refresh();
     }
 
 }

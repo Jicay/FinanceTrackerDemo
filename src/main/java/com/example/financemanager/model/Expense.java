@@ -1,7 +1,6 @@
 package com.example.financemanager.model;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -16,8 +15,11 @@ public class Expense {
     private final float travel;
     private final float tax;
     private final float other;
+    private boolean isDollar = false;
+    private float changeRate = 1.0f;
 
     private final static String PRICE_FORMAT = "%.2f €";
+    private final static String DOLLAR_PRICE_FORMAT = "$%.2f";
 
     private final static DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("MMMM yyyy");
 
@@ -42,6 +44,9 @@ public class Expense {
     }
 
     private SimpleStringProperty formatAmount(float amount) {
+        if (isDollar) {
+            return new SimpleStringProperty(String.format(DOLLAR_PRICE_FORMAT, amount*changeRate));
+        }
         return new SimpleStringProperty(String.format(PRICE_FORMAT, amount));
     }
 
@@ -126,5 +131,10 @@ public class Expense {
 
     public int compareTo(Expense expense) {
         return -this.date.compareTo(expense.date);
+    }
+
+    public void switchCurrency(float changeRate) {
+        isDollar = !isDollar;
+        this.changeRate = changeRate;
     }
 }
